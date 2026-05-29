@@ -5,7 +5,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
 body{
@@ -97,6 +98,31 @@ footer{
     background:#111;
     color:white;
 }
+.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+.dark-mode .card{
+    background:#1f1f1f;
+    color:white;
+}
+
+.dark-mode .navbar{
+    background:black;
+}
+
+.dark-mode .contact{
+    background:black;
+}
+
+body,
+.hero,
+.card,
+.navbar,
+.contact{
+transition:1s;
+}
 
 .social-icons a{
 	font-size:30px;
@@ -163,6 +189,78 @@ padding:15px;
 border-radius:15px;
 }
 
+/* Shooting Star */
+.star{
+position:fixed;
+top:-20px;
+width:3px;
+height:80px;
+background:
+linear-gradient(
+white,
+transparent
+);
+transform:
+rotate(135deg);
+pointer-events:none;
+animation:
+shoot 2.3s linear forwards;
+z-index:9999;
+}
+@keyframes shoot{
+0%{
+opacity:1;
+transform:
+translate(0,0)
+rotate(135deg);
+}
+100%{
+opacity:0;
+transform:
+translate(
+300px,
+300px
+)
+rotate(135deg);
+}
+}
+
+/* MOON */
+.moon{
+position:absolute;
+top:40px;
+right:60px;
+width:100px;
+height:100px;
+border-radius:50%;
+background:
+radial-gradient(
+circle at 30% 30%,
+#fff,
+#ddd
+);
+box-shadow:
+0 0 20px #fff,
+0 0 40px #fff,
+0 0 60px #dcdcdc;
+opacity:0;
+transition:1s;
+z-index:1;
+}
+
+.hero.night .moon{
+opacity:1;
+}
+
+.hero img,
+.hero h1,
+.hero p,
+.hero button,
+.hero h4{
+position:relative;
+z-index:2;
+}
+
 </style>
 </head>
 
@@ -184,6 +282,10 @@ border-radius:15px;
 </li>
 
 <li class="nav-item">
+<a class="nav-link" href="#interests">Interests</a>
+</li>
+
+<li class="nav-item">
 <a class="nav-link" href="#skills">Skills</a>
 </li>
 
@@ -195,12 +297,7 @@ border-radius:15px;
 <a class="nav-link" href="#contact">Contact</a>
 </li>
 
-<li class="nav-item">
-<a class="nav-link" href="#interests">Interests</a>
-</li>
 </ul>
-
-<button class="btn btn-light ms-3" onclick="toggleMode()">~ Dark Mode</button>
 
 </div>
 </div>
@@ -208,7 +305,11 @@ border-radius:15px;
 
 <!-- Hero -->
 <section class="hero">
-<img src="C://Users//ADMIN//Desktop//New folder.jpeg//" >
+
+<div class="moon"></div>
+
+<img src="#" >
+
 <h1 class="mt-3">
 Hello, I'm Giannina Alwyn
 </h1>
@@ -223,6 +324,7 @@ Web Developer | Student | Designer
 
 <!-- About -->
 <section id="about" class="about container">
+
 <h2><big>About Me</big></h2>
 <p>
 I am a student interested in web
@@ -239,9 +341,9 @@ class="container mb-5">
 
 <h2 class="text-center mb-4">My Interests</h2>
 <div class="row text-center">
+
 <div class="col-md-3">
 <div class="card p-4">
-
 <h1>💻</h1>
 <h5>Coding</h5>
 <p>
@@ -253,7 +355,6 @@ new technologies.
 
 <div class="col-md-3">
 <div class="card p-4">
-
 <h1>🎵</h1>
 <h5>Music</h5>
 <p>
@@ -265,7 +366,6 @@ instruments.
 
 <div class="col-md-3">
 <div class="card p-4">
-
 <h1>📚</h1>
 <h5>Reading</h5>
 <p>
@@ -277,7 +377,6 @@ knowledge.
 
 <div class="col-md-3">
 <div class="card p-4">
-
 <h1>🎮</h1>
 <h5>Gaming</h5>
 <p>
@@ -367,7 +466,7 @@ class="container mb-5">
 <!-- Contact -->
 <section id="contact"class="contact">
 <h2>Contact Me</h2>
-<p>Feel free to send a message</p>
+<p>Feel free to send a message...</p>
 <form id="contactForm"
 class="container">
 <input type="text" id="name" placeholder="Your Name" class="form-control mb-3" required>
@@ -376,8 +475,18 @@ class="container">
 </textarea>
 <button type="submit" class="btn btn-warning">Send Message</button>
 </form>
-
 <p id="successMsg"></p>
+
+<div class="social-icons">
+<a href="https://www.instagram.com/ft_.vixenjinx._/">
+<i class="bi bi-instagram"></i>
+</a>
+
+<a href="https://github.com/gianninaalwyn">
+<i class="bi bi-github"></i>
+</a>
+</div>
+
 </section>
 
 <footer>
@@ -390,7 +499,9 @@ class="container">
 
 <!-- Bootstrap JS -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src=
+"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
 
 <!-- JavaScript -->
 <script>
@@ -398,32 +509,46 @@ function welcome(){
     alert("Thanks for visiting my portfolio!");
 }
 
-function toggleMode(){
-    document.body.classList.toggle("dark-mode");
+function autoDarkMode(){
+let hour =
+new Date().getHours();
+// NIGHT MODE:
+if(hour >= 18 || hour <= 5){
+document.body.classList.add(
+"dark-mode"
+);
+document.querySelector(".hero").classList.add("night");
 }
+// DAY MODE:
+else{
+document.body.classList.remove(
+"dark-mode"
+);
+document.querySelector(".hero").classList.remove("night");
+}
+}
+// run immediately
+autoDarkMode();
+// check every minute
+setInterval(
+autoDarkMode,
+60000
+);
 
 function updateClock(){
-let now =
-new Date();
+let now = new Date();
 document.getElementById("clock")
-.innerHTML =
-now.toDateString()
-+" | "+
-now.toLocaleTimeString();
+.innerHTML = now.toDateString()+" | "+ now.toLocaleTimeString();
 }
-
 setInterval(updateClock,1000);
 updateClock();
-window.onscroll =
-function(){
+window.onscroll = function(){
 scrollButton();
 };
 
 function scrollButton(){
-let button =
-document.getElementById("topBtn");
-if(document.body.scrollTop>100 ||
-document.documentElement.scrollTop>100)
+let button = document.getElementById("topBtn");
+if(document.body.scrollTop>100 || document.documentElement.scrollTop>100)
 {
 button.style.display =
 "block";
@@ -467,15 +592,42 @@ randomQuote,
 document.getElementById("contactForm").addEventListener("submit", function(event)
 {
 event.preventDefault();
-let name =
-document.getElementById("name").value;
+let name = document.getElementById("name").value;
 document.getElementById("successMsg").innerHTML = "Thank you, "+ name +"! Your message was sent.";
 this.reset();
 }
 );
+
+function createStar(){
+let hour =
+new Date().getHours();
+// Only night:
+if(hour >= 18 || hour <= 5)
+{
+let star = document.createElement("div");
+star.className = "star";
+star.style.left = Math.random() * window.innerWidth + "px";
+star.style.top = Math.random() * 200 + "px";
+document.body.appendChild(star);
+setTimeout(()=>{
+star.remove();
+},1500);
+}
+}
+
+/* New shooting star every
+4 seconds */
+setInterval(() => {
+for(let i = 0; i < 3; i++){
+setTimeout(() => {
+createStar();
+}, i * 500);
+}
+}, 4000);
+
 </script>
 
-<button id="topBtn"onclick="topFunction()">↑</button>
+<button id="topBtn" onclick="topFunction()">↑</button>
 
 </body>
 </html>
